@@ -1,0 +1,13 @@
+{{ define "title" -}}{{- .Title -}}{{- end }}
+{{ define "description" -}}{{- .Title -}}の一覧です。{{- end }}
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  <ul>
+    {{ range .Pages }}
+      <li>
+        <a class="icon" href="{{ .RelPermalink }}">{{ .Params.icon }}</a>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>（{{ .Pages | len }}）
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

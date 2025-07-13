@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{ if .Ancestors.Reverse -}}{{ block "title" . }}{{ end }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="{{ block "description" . }}{{ end }}">
+    {{ hugo.Generator }}
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Yusuke Endoh">
+  	<link rel="shortcut icon" href="{{ relURL ($.Site.Params.favicon) }}" type="image/x-icon" />
+    <link rel="canonical" href="https://mame.github.io/iol-ja-walkthrough/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style type="text/css">
+      body {
+        font-family: "Helvetica Neue",
+          Arial,
+          "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans",
+          Meiryo,
+          sans-serif;
+      }
+
+      body > header {
+        text-align: center;
+        padding-bottom: 0px;
+      }
+      body > header > h1 {
+        margin-bottom: 0px;
+      }
+      section.hero {
+        text-align: center;
+        margin-bottom: calc(var(--pico-typography-spacing-vertical) * 2);
+      }
+
+      nav ul {
+        align-items: start;
+      }
+
+      dl {
+        margin-bottom: 0;
+        display: grid;
+        grid-template-columns: max-content auto;
+      }
+      dd, dt {
+        margin: 0;
+        padding: 0 calc(var(--pico-spacing) / 2);
+        border-bottom: var(--pico-border-width) solid var(--pico-table-border-color);
+      }
+
+      p.toggle-button {
+        margin-top: calc(var(--pico-typography-spacing-vertical) * 2.5);
+        text-align: right;
+        margin-bottom: auto;
+      }
+      p.toggle-button label {
+        display: inline-block;
+      }
+
+      details {
+        border: var(--pico-border-width) solid var(--pico-primary-border);
+        border-radius: calc(var(--pico-border-radius) + var(--pico-border-width));
+      }
+      details.contrast {
+        border-color: var(--pico-contrast-border);
+      }
+      details div {
+        padding: 0px var(--pico-spacing);
+      }
+
+      footer nav {
+        justify-content: center;
+      }
+
+      code {
+        font-size: 1em;
+        font-family: inherit;
+      }
+
+      [data-theme=light],
+      :root:not([data-theme=dark]) {
+        --pico-text-selection-color: rgba(244, 93, 44, 0.25);
+        --pico-contrast: #bd3c13;
+        --pico-contrast-background: #d24317;
+        --pico-contrast-underline: rgba(189, 60, 19, 0.5);
+        --pico-contrast-hover: #942d0d;
+        --pico-contrast-hover-background: #bd3c13;
+        --pico-contrast-focus: rgba(244, 93, 44, 0.5);
+        --pico-contrast-inverse: #fff;
+        --pico-code-background-color: rgba(234, 236, 240, 0.75);
+      }
+      @media only screen and (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+          --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
+          --pico-contrast: #f56b3d;
+          --pico-contrast-background: #d24317;
+          --pico-contrast-underline: rgba(245, 107, 61, 0.5);
+          --pico-contrast-hover: #f8a283;
+          --pico-contrast-hover-background: #e74b1a;
+          --pico-contrast-focus: rgba(245, 107, 61, 0.375);
+          --pico-contrast-inverse: #fff;
+          --pico-code-background-color: rgba(30, 36, 49, 75);
+        }
+      }
+      [data-theme=dark] {
+        --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
+        --pico-contrast: #f56b3d;
+        --pico-contrast-background: #d24317;
+        --pico-contrast-underline: rgba(245, 107, 61, 0.5);
+        --pico-contrast-hover: #f8a283;
+        --pico-contrast-hover-background: #e74b1a;
+        --pico-contrast-focus: rgba(245, 107, 61, 0.375);
+        --pico-contrast-inverse: #fff;
+      }
+
+      span.title {
+        display: inline-block;
+      }
+      div.remark {
+        background-color: var(--pico-form-element-background-color);
+        color: var(--pico-form-element-color);
+        border-left: 0.2rem solid var(--pico-form-element-active-border-color);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+      }
+      div.remark::before {
+        content: "✎ ";
+        margin-right: 0.5em;
+      }
+      a.icon {
+        text-decoration: none;
+      }
+    </style>
+
+    <meta property="og:title" content="{{ block "title" . }}{{ end }}" />
+    <meta property="og:description" content="{{ block "title" . }}{{ end }}です。" />
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:locale" content="ja_jp">
+    <meta property="og:type" content="website">
+
+    <meta itemprop="name" content="{{ block "title" . }}{{ end }}">
+    <meta itemprop="description" content="{{ block "title" . }}{{ end }}です。">
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="{{ block "title" . }}{{ end }}"/>
+    <meta name="twitter:description" content="{{ block "title" . }}{{ end }}です。"/>
+    <meta name="twitter:creator" content="@mametter"/>
+
+    {{ if hugo.IsProduction }}
+      {{ template "_internal/google_analytics.html" . }}
+    {{ end }}
+  </head>
+  <body>
+    <header>
+      <h1>
+        <span class="title">言語学オリンピック</span>
+        <span class="title">過去問攻略集</span>
+      </h1>
+    </header>
+    <main class="container" role="main">
+      {{ if .Ancestors.Reverse -}}
+      <nav aria-label="breadcrumb" class="breadcrumb">
+        <ul>
+          {{- range .Ancestors.Reverse -}}
+          <li><a href="{{ .RelPermalink }}">
+            {{- if .Params.index -}}
+              第{{ .Params.index }}問
+            {{- else if .Params.year -}}
+              {{ .Params.year }}
+            {{- else if .Params.contest -}}
+              {{ .Params.contest }}
+            {{- else -}}
+              {{ .Title }}
+            {{ end -}}
+          </a></li>
+          {{- end -}}
+          <li class="active">
+            <a aria-current="page" href="{{ .RelPermalink }}">
+              {{- if .Params.index -}}
+                {{ .Params.index }}
+              {{- else if .Params.year -}}
+                {{ .Params.year }}
+              {{- else if .Params.contest -}}
+                {{ .Params.icon }} {{ .Params.contest }}
+              {{- else -}}
+                {{ .Title }}
+              {{ end -}}
+            </a>
+          </li>
+        </ul>
+      </nav>
+      {{- end }}
+
+{{ block "main" . }}{{ end }}
+
+{{ if hugo.IsProduction }}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6743566866644964"
+     crossorigin="anonymous"></script>
+<!-- iol-ja-walkthrough -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6743566866644964"
+     data-ad-slot="9712773212"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+{{ end }}
+
+    </main>
+    <footer class="header">
+      <nav class="container" role="navigation" aria-label="main navigation">
+        <ul>
+          <li>&copy; 2025 Yusuke Endoh</li>
+        </ul>
+        <ul>
+          <li><a href="{{- with .Site.GetPage "/about" }}{{ .RelPermalink }}{{- end }}">このサイトについて</a></li>
+          <li><a href="{{- with .Site.GetPage "/privacy" }}{{ .RelPermalink }}{{- end }}">プライバシーポリシー</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>

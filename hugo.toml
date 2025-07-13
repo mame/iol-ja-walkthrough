@@ -1,0 +1,8 @@
+baseURL = 'https://mame.github.io/iol-ja-walkthrough/'
+languageCode = 'ja-jp'
+title = '言語学オリンピック 過去問攻略集'
+taxonomies.tag = 'tags'
+markup.goldmark.extensions.strikethrough = false
+markup.goldmark.extensions.extras.superscript.enable = true
+markup.goldmark.extensions.extras.subscript.enable = true
+GoogleAnalytics = 'G-CDR9SXR5BM'

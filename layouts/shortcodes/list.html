@@ -1,0 +1,26 @@
+{{ $problems := slice }}
+{{ range .Site.RegularPages }}
+{{   if .Params.index }}
+{{   $problems = $problems | append (dict "Page" . "Weight" .Parent.Parent.Weight) }}
+{{ end }}
+{{ end }}
+<table>
+<thead>
+<tr>
+<th>問題</th>
+<th>言語</th>
+<th>難易度</th>
+</tr>
+</thead>
+{{ range sort $problems "Weight" }}
+<tr>
+<th>
+  <a href="{{ .Page.RelPermalink }}">
+    {{ .Page.Parent.Parent.Params.contest }}{{ .Page.Parent.Params.year }}-{{ .Page.Params.index }}
+  </a>
+</th>
+<td>{{ .Page.Params.lang }}</td>
+<td>{{- .Page.Params.level }}</td>
+</tr>
+{{ end }}
+</table>

@@ -1,0 +1,56 @@
+{{- if eq .Text "details" -}}
+{{-   $details := .Page.Store.Set "details" true -}}
+{{-   .Page.Store.Set "heading_prev_level" 1 -}}
+<p class="toggle-button">
+  <label for="toggle-details">
+    すべてのヒント・答えを表示
+    <input type="checkbox" {{ if hugo.IsDevelopment }}checked {{ end }}role="switch" id="toggle-details" name="toggle-details" />
+  </label>
+</p>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('toggle-details').addEventListener('change', function() {
+      for (const details of document.getElementsByTagName('details')) {
+        details.open = this.checked;
+      }
+    });
+  });
+</script>
+{{- else if .Page.Store.Get "details" }}
+{{-   $details_prev_level := .Page.Store.Get "heading_prev_level" -}}
+{{-   .Page.Store.Set "heading_prev_level" .Level -}}
+{{-   if ge $details_prev_level .Level -}}
+{{-     range seq $details_prev_level .Level -}}
+</div>
+</details>
+{{-     end -}}
+{{-   end -}}
+{{-   if eq .Text "/details" -}}
+{{-     .Page.Store.Set "details" false -}}
+{{-   else -}}
+{{-     $open := false -}}
+{{-     $details := .Page.Store.Get "details" -}}
+{{-     $class := "primary" -}}
+{{-     if eq .Level 3 -}}
+{{-       $class = "secondary" -}}
+{{-     end -}}
+{{-     if eq .Text "問題文に関する注意点" -}}
+{{-       $class = "contrast" -}}
+{{-       $open = true -}}
+{{-     end -}}
+{{-     if strings.Contains .Text "答え" -}}
+{{-       $class = "contrast" -}}
+{{-     end -}}
+{{-     if .Attributes.class -}}
+{{-       $class = .Attributes.class -}}
+{{-     end -}}
+<details {{ if or hugo.IsDevelopment $open }}open {{ end }}class="{{ $class }}">
+<summary class="{{ $class }}" role="button">{{ .Text | safeHTML }}</summary>
+<div>
+{{-   end -}}
+{{- else -}}
+<h{{ .Level }} {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
+{{- .Text -}}
+</h{{ .Level }}>
+{{- end -}}
+

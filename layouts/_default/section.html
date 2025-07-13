@@ -1,0 +1,31 @@
+{{ define "title" -}}
+{{- if .Params.contest -}}
+{{- .Params.icon -}} {{- .Title -}}の攻略
+{{- else -}}
+{{- .Parent.Params.contest -}}{{- .Params.year -}} の攻略
+{{- end -}}
+{{- end }}
+{{ define "description" -}}
+{{- if .Params.contest -}}
+{{- .Title -}}の各問題の攻略集です。
+{{- else -}}
+{{- .Parent.Params.contest -}}{{- .Params.year -}} の各問題の攻略です。
+{{- end -}}
+{{- end }}
+{{ define "main" }}
+<hgroup>
+<h2>{{ block "title" . }}{{ end }}</h2>
+</hgroup>
+{{ if .Params.contest }}
+{{ .Content }}
+{{ range sort .Pages ".Params.year" "desc" }}
+<article>
+<h3><a href="{{ .RelPermalink }}">{{ .Parent.Params.contest }}{{ .Params.year }}</a></h3>
+{{ partial "problems.html" .Pages }}
+</article>
+{{ end }}
+{{ else }}
+{{ .Content }}
+{{ partial "problems.html" .Pages }}
+{{ end }}
+{{ end }}

@@ -1,0 +1,33 @@
+{{ define "title" -}}{{- .Site.Title -}}{{- end }}
+{{ define "description" -}}言語学オリンピックの過去問の攻略・ヒントを独自に公開しているサイトです。{{- end }}
+{{- define "main" -}}
+{{- .Content -}}
+
+<section class="hero">
+<p><span class="title">言語学オリンピックの過去問の攻略・ヒントを</span><span class="title">独自に公開しています。</span></p>
+<p><a href="about">このサイトについて</a></p>
+</section>
+
+<section>
+
+<article>
+<h2>🏆 IOL（世界大会）</h2>
+<p>International Linguistics Olympiad (IOL) の問題の攻略・ヒントを掲載しています。</p>
+<p><a href="iol">攻略を見る</a></p>
+</article>
+
+<article>
+<h2>🌏 APLO（アジア・太平洋大会）</h2>
+<p>Asia Pacific Linguistics Olympiad (APLO) の問題の攻略・ヒントを掲載しています。</p>
+<p><a href="aplo">攻略を見る</a></p>
+</article>
+
+<article>
+<h2>🗾 JOL（日本大会）</h2>
+<p>日本言語学オリンピック（JOL）の問題の攻略・ヒントを掲載しています。</p>
+<p><a href="jol">攻略を見る</a></p>
+</article>
+
+</section>
+
+{{- end -}}

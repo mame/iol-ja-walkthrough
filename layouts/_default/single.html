@@ -1,0 +1,53 @@
+{{ define "title" -}}
+{{- with .LinkTitle -}}
+{{- . -}}
+{{- else -}}
+{{ .Parent.Parent.Params.contest }}{{ .Parent.Params.year }}-{{ .Params.index }} の攻略
+{{- end -}}
+{{- end }}
+{{ define "description" -}}
+{{- if .LinkTitle -}}
+{{- .Summary -}}
+{{- else -}}
+{{ block "title" . }}{{ end }}です。
+{{- end -}}
+{{- end }}
+{{- define "main" -}}
+      <hgroup><h2>{{ block "title" . }}{{ end }}</h2></hgroup>
+      {{ if not .LinkTitle }}
+      {{/*
+      <nav class="container" role="navigation" aria-label="main navigation">
+        {{ $index := .Params.index }}
+        {{ if eq $index 1 }}<ul><li></li></ul>{{ end }}
+        {{ range sort .Parent.Pages }}
+        {{ if eq .Params.index (sub $index 1) }}
+        <ul><li><a href="{{ .RelPermalink }}">&lt; {{ .Parent.Parent.Params.contest }}{{ .Parent.Params.year }}-{{ .Params.index }}</a></li></ul>
+        {{ else if eq .Params.index (add $index 1) }}
+        <ul><li><a href="{{ .RelPermalink }}">{{ .Parent.Parent.Params.contest }}{{ .Parent.Params.year }}-{{ .Params.index }} &gt;</a></li></ul>
+        {{ end }}
+        {{ end }}
+      </nav>
+      */}}
+      <article>
+        <dl>
+          <dt>問題文</dt>
+          <dd><a href="{{ .Parent.Params.problem_url }}">PDF</a></dd>
+          <dt>言語</dt>
+          <dd>{{ .Params.lang }}</dd>
+          {{ with .GetTerms "tags" }}
+          <dt>問題形式</dt>
+          <dd>
+            {{- range . -}}<a class="icon title" title="{{ .Title }}" href="{{ .RelPermalink }}">{{ .Params.icon }}{{ .Title }}</a> {{ end -}}
+          </dd>
+          {{ end }}
+          <dt>難易度</dt>
+          {{- $level := .Params.level }}
+          <dd>
+            {{- range seq $level }}★{{ end -}}
+            {{- range seq 5 }}{{ if gt . $level }}☆{{ end }}{{ end -}}
+          </dd>
+        </dl>
+      </article>
+      {{ end }}
+{{- .Content | replaceRE "\n+" "" | safeHTML -}}
+{{- end -}}
