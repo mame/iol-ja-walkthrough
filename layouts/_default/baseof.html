@@ -197,7 +197,6 @@
 
 {{ block "main" . }}{{ end }}
 
-{{ if hugo.IsProduction }}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6743566866644964"
      crossorigin="anonymous"></script>
 <!-- iol-ja-walkthrough -->
@@ -206,11 +205,11 @@
      data-ad-client="ca-pub-6743566866644964"
      data-ad-slot="9712773212"
      data-ad-format="auto"
+     {{ if not hugo.IsProduction }}data-adtest="true"{{ end }}
      data-full-width-responsive="true"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-{{ end }}
 
     </main>
     <footer class="header">
