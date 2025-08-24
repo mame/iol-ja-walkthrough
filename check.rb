@@ -75,7 +75,7 @@ def check_problem_md(src, contest, year, index)
     (
       \+\+\+\n
       index\s=\s#{ index }\n
-      lang\s=\s'[^\n]+'\n
+      (?:lang|script)\s=\s'[^\n]+'\n
       level\s=\s\d+\n
       tags\s=\s\[[^\n]+\]\n
       (note\s=\strue\n)?

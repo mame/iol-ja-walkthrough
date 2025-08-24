@@ -32,8 +32,14 @@
         <dl>
           <dt>問題文</dt>
           <dd><a href="{{ .Parent.Params.problem_url }}">PDF</a></dd>
+          {{ if .Params.lang }}
           <dt>言語</dt>
           <dd>{{ .Params.lang }}</dd>
+          {{ end }}
+          {{ if .Params.script }}
+          <dt>文字</dt>
+          <dd>{{ .Params.script }}</dd>
+          {{ end }}
           {{ with .GetTerms "tags" }}
           <dt>問題形式</dt>
           <dd>

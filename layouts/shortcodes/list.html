@@ -19,7 +19,7 @@
     {{ .Page.Parent.Parent.Params.contest }}{{ .Page.Parent.Params.year }}-{{ .Page.Params.index }}
   </a>
 </th>
-<td>{{ .Page.Params.lang }}</td>
+<td>{{ or .Page.Params.lang .Page.Params.script }}</td>
 <td>{{- .Page.Params.level }}</td>
 </tr>
 {{ end }}

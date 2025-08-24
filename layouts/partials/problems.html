@@ -6,7 +6,7 @@
 {{ range sort $problems "Weight" }}
 <li>
   <a href="{{ .Page.RelPermalink }}">
-    {{ .Page.Parent.Parent.Params.contest }}{{ .Page.Parent.Params.year }}-{{ .Page.Params.index }}: {{ .Page.Params.lang }}
+    {{ .Page.Parent.Parent.Params.contest }}{{ .Page.Parent.Params.year }}-{{ .Page.Params.index }}: {{ or .Page.Params.lang .Page.Params.script }}
   </a>
 </li>
 {{ end }}
