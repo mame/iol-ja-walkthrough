@@ -2,7 +2,7 @@
 {{- with .LinkTitle -}}
 {{- . -}}
 {{- else -}}
-{{ .Parent.Parent.Params.contest }}{{ .Parent.Params.year }}-{{ .Params.index }} の攻略
+{{ .Parent.Parent.Params.contest }}{{ .Parent.Params.year }}{{ if .Params.team }}-team{{ end }}-{{ .Params.index }} の攻略
 {{- end -}}
 {{- end }}
 {{ define "description" -}}

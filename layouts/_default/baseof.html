@@ -181,7 +181,7 @@
           <li class="active">
             <a aria-current="page" href="{{ .RelPermalink }}">
               {{- if .Params.index -}}
-                {{ .Params.index }}
+                {{ if .Params.team }}team-{{ end }}{{ .Params.index }}
               {{- else if .Params.year -}}
                 {{ .Params.year }}
               {{- else if .Params.contest -}}
