@@ -11,7 +11,7 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Yusuke Endoh">
   	<link rel="shortcut icon" href="{{ relURL ($.Site.Params.favicon) }}" type="image/x-icon" />
-    <link rel="canonical" href="https://mame.github.io/iol-ja-walkthrough/">
+    <link rel="canonical" href="{{ .Permalink }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <style type="text/css">
       body {
@@ -101,7 +101,7 @@
           --pico-contrast-hover-background: #e74b1a;
           --pico-contrast-focus: rgba(245, 107, 61, 0.375);
           --pico-contrast-inverse: #fff;
-          --pico-code-background-color: rgba(30, 36, 49, 75);
+          --pico-code-background-color: rgba(30, 36, 49, 0.75);
         }
       }
       [data-theme=dark] {
@@ -140,7 +140,6 @@
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:locale" content="ja_jp">
-    <meta property="og:type" content="website">
 
     <meta itemprop="name" content="{{ block "title" . }}{{ end }}">
     <meta itemprop="description" content="{{ block "title" . }}{{ end }}です。">
